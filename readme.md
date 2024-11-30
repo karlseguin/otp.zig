@@ -112,7 +112,7 @@ const code = otp.totp.generateAt(&code, &secret, now, config);
 std.debug.assert(otp.totp.verifyAt(code, &secret, now config) == true);
 ```
 
-When generating a code, the buffer, `code_buf` above, must b eat least `config.digits` long.
+When generating a code, the buffer, `code_buf` above, must be at least `config.digits` long.
 
 #### URL
 You can generate a URL (which is what would be put in a QR code) using either the `url` or `bufUrl` functions. These functions take their own type of config object:
