@@ -77,11 +77,11 @@ Passed to various totp functions:
 * `digits: u8` - Number of digits. Defaults to 6.
 * `algorithm: otp.totp.Algorithm` - The hash algorithm to use. Defaults to `.sha1` (other supported value is `.sha256`)
 
-#### otp.totp.generate(buf: []u8, secret: []const u8, config: Config) []u8
+#### otp.totp.generate(buf: []u8, secret: []const u8, config: Config) ![]u8
 Generate a new TOTP code for the current time. `buf` must be at least `config.digits`. A slice of `buf[0..config.digits]` is returned.
 
 
-#### otp.totp.generateAt(buf: []u8, secret: []const u8, timestamp: i64, config: Config) []u8
+#### otp.totp.generateAt(buf: []u8, secret: []const u8, timestamp: i64, config: Config) ![]u8
 Generate a new TOTP code for the specified time. `buf` must be at least `config.digits`. A slice of `buf[0..config.digits]` is returned.
 
 #### otp.totp.verify(code: []const u8, secret: []const u8, config: Config) bool
@@ -108,7 +108,7 @@ const config = otp.TOTP.Config{
     .interval = 30,
     .algorithm = .sha1,
 };
-const code = otp.totp.generateAt(&code, &secret, now, config);
+const code = try otp.totp.generateAt(&code, &secret, now, config);
 std.debug.assert(otp.totp.verifyAt(code, &secret, now config) == true);
 ```
 
