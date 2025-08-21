@@ -529,9 +529,9 @@ test "TOTP: url" {
     }
 
     {
-        var arr = std.ArrayList(u8).init(std.testing.allocator);
-        defer arr.deinit();
-        try url(arr.writer(), &.{ 12, 34, 56 }, .{ .account = "!account!", .issuer = "an issuer", .config = .{ .digits = 10, .interval = 20, .algorithm = .sha256 } });
+        var arr: std.ArrayList(u8) = .empty;
+        defer arr.deinit(std.testing.allocator);
+        try url(arr.writer(std.testing.allocator), &.{ 12, 34, 56 }, .{ .account = "!account!", .issuer = "an issuer", .config = .{ .digits = 10, .interval = 20, .algorithm = .sha256 } });
         try expectString("otpauth://totp/an%20issuer:%21account%21?issuer=an%20issuer&secret=BQRDQ&algorithm=SHA256&digits=10&interval=20", arr.items);
     }
 }
