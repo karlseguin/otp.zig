@@ -1,0 +1,12 @@
+.{
+    .name = .otp_zig,
+    .version = "0.0.0",
+    .fingerprint = 0x24129a0d2e8211aa, // Changing this has security and trust implications.
+    .minimum_zig_version = "0.15.1",
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}
